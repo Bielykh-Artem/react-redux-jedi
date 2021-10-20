@@ -1,0 +1,46 @@
+{
+  "name": "react-redux-jedi",
+  "version": "1.0.1",
+  "description": "Everything you need for fast Redux development",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --write \"**/*.+(js|jsx|ts|tsx)\"",
+    "commit-hook": "git add .",
+    "build": "tsc"
+  },
+  "pre-commit": [
+    "prettier",
+    "commit-hook"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bielykh-Artem/react-redux-jedi.git"
+  },
+  "keywords": [
+    "redux"
+  ],
+  "author": {
+    "email": "bielykh.artem@gmail.com",
+    "name": "Artem Bielykh",
+    "url": "https://github.com/Bielykh-Artem"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bielykh-Artem/react-redux-jedi/issues"
+  },
+  "homepage": "https://github.com/Bielykh-Artem/react-redux-jedi#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-router": "^5.2.1",
+    "redux": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.30",
+    "@types/react-router": "^5.1.17",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4"
+  }
+}
