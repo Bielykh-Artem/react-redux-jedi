@@ -1,13 +1,29 @@
 import { DEFAULT_PREFIXES } from "./constants";
-import { IActionTypes } from "./interfaces";
+import { IActionTypes, IActionTypesOpts } from "./interfaces";
 
-export const createActionTypes = (constantsForActions: string[], prefixes?: string[]) => {
+export const createActionTypes = (
+  constantsForActions: string[],
+  prefixes?: string[],
+  additionalOptions?: IActionTypesOpts,
+) => {
   const actionTypes: IActionTypes = {};
 
-  constantsForActions.forEach((aT) => {
+  let prefixesArr: string[] = [];
+
+  if (prefixes && prefixes.length) {
+    if (additionalOptions && additionalOptions.useOnlyCustomPrefixes) {
+      prefixesArr = [...prefixesArr, ...prefixes];
+    } else {
+      prefixesArr = [...DEFAULT_PREFIXES, ...prefixes];
+    }
+  } else {
+    prefixesArr = DEFAULT_PREFIXES;
+  }
+
+  [...new Set(constantsForActions)].forEach((aT) => {
     actionTypes[aT] = {};
 
-    (prefixes || DEFAULT_PREFIXES).forEach((t) => {
+    [...new Set(prefixesArr)].forEach((t) => {
       actionTypes[aT][t] = `${aT}_${t}`;
     });
   });

@@ -1,21 +1,92 @@
 import { DEFAULT_PREFIXES } from "./constants";
-import { IActions } from "./interfaces";
+import { IActions, IActionsOpts } from "./interfaces";
 
-export const createActions = (constantsForActions: string[], prefixes?: string[]) => {
+export const createActions = (constantsForActions: string[], prefixes?: string[], additionalOptions?: IActionsOpts) => {
   const actions: IActions = {};
 
-  constantsForActions.forEach((aT) => {
+  let prefixesArr: string[] = [];
+
+  if (prefixes && prefixes.length) {
+    if (additionalOptions && additionalOptions.useOnlyCustomPrefixes) {
+      prefixesArr = [...prefixesArr, ...prefixes];
+    } else {
+      prefixesArr = [...DEFAULT_PREFIXES, ...prefixes];
+    }
+  } else {
+    prefixesArr = DEFAULT_PREFIXES;
+  }
+
+  [...new Set(constantsForActions)].forEach((aT) => {
     actions[aT] = {};
 
-    (prefixes || DEFAULT_PREFIXES).forEach((t) => {
-      actions[aT][t] = (payload?: Object, cb?: () => void, options?: Object) => ({
-        type: `${aT}_${t}`,
-        payload,
-        cb,
-        options,
-      });
+    [...new Set(prefixesArr)].forEach((t) => {
+      if (additionalOptions) {
+        const { withCallback, withOptions } = additionalOptions;
+
+        if (withCallback && withOptions) {
+          actions[aT][t] = useFullAction(aT, t);
+        } else if (withCallback && !withOptions) {
+          actions[aT][t] = useActionWithCb(aT, t);
+        } else if (!withCallback && withOptions) {
+          actions[aT][t] = useActionWithOpts(aT, t);
+        } else {
+          actions[aT][t] = useDefaultAction(aT, t);
+        }
+      } else {
+        actions[aT][t] = useFullAction(aT, t);
+      }
     });
   });
 
-  return actions;
+  if (additionalOptions && additionalOptions.useActionAliasName) {
+    const actionsWithFuncAliases: { [key: string]: (payload?: Object, cb?: () => void, options?: Object) => any } = {};
+
+    Object.entries(actions).forEach(([key, value]) => {
+      let name = key.split("_");
+
+      Object.entries(value).forEach(([_key, _value]) => {
+        name.push(_key);
+        actionsWithFuncAliases[camelCase(name.join(" "))] = _value;
+      });
+    });
+
+    return actionsWithFuncAliases;
+  } else {
+    return actions;
+  }
 };
+
+const useFullAction = (aT: string, t: string) => (payload?: Object, cb?: () => void, options?: Object) => ({
+  type: `${aT}_${t}`,
+  payload,
+  cb,
+  options,
+});
+
+const useDefaultAction = (aT: string, t: string) => (payload?: Object) => ({
+  type: `${aT}_${t}`,
+  payload,
+});
+
+const useActionWithCb = (aT: string, t: string) => (payload?: Object, cb?: () => void) => ({
+  type: `${aT}_${t}`,
+  payload,
+  cb,
+});
+
+const useActionWithOpts = (aT: string, t: string) => (payload?: Object, options?: Object) => ({
+  type: `${aT}_${t}`,
+  payload,
+  options,
+});
+
+const camelCase = (str: string) => {
+  let string = str
+    .toLowerCase()
+    .replace(/[^A-Za-z0-9]/g, " ")
+    .split(" ")
+    .reduce((result, word) => result + capitalize(word.toLowerCase()));
+  return string.charAt(0).toLowerCase() + string.slice(1);
+};
+
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.toLowerCase().slice(1);
