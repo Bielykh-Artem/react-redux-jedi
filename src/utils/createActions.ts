@@ -42,11 +42,8 @@ export const createActions = (constantsForActions: string[], prefixes?: string[]
     const actionsWithFuncAliases: { [key: string]: (payload?: Object, cb?: () => void, options?: Object) => any } = {};
 
     Object.entries(actions).forEach(([key, value]) => {
-      let name = key.split("_");
-
       Object.entries(value).forEach(([_key, _value]) => {
-        name.push(_key);
-        actionsWithFuncAliases[camelCase(name.join(" "))] = _value;
+        actionsWithFuncAliases[camelCase([key.split("_")].concat([_key]).join(" "))] = _value;
       });
     });
 
