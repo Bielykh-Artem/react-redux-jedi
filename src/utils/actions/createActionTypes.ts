@@ -1,5 +1,5 @@
-import { DEFAULT_PREFIXES } from "./constants";
-import { IActionTypes, IActionTypesOpts } from "./interfaces";
+import { DEFAULT_PREFIXES } from "../";
+import { IActionTypes, IActionTypesOpts } from "../";
 
 export const createActionTypes = (
   constantsForActions: string[],
