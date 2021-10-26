@@ -14,4 +14,4 @@ Documentation link: [https://bielykh-artem.github.io/](https://bielykh-artem.git
 
 | Method | Description  | 
 | ------ | ------ |
-| routerAssessor | Renders a list of routes based on the config. Allow child routes. The nesting level can be any. |
+| routerRoute | Renders a list of routes based on the config. Allow child routes. The nesting level can be any. |
