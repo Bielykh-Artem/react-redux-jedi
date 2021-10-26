@@ -1,6 +1,6 @@
 {
   "name": "react-redux-jedi",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "That's what you're all waiting for.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
