@@ -1,1 +1,1 @@
-export * from "./routerAssessor";
+export * from "./renderRoute";

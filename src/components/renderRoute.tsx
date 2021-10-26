@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router";
 
-export const routerAssessor = (parentRoutePath: string | null, route: any) => {
+export const renderRoute = (parentRoutePath: string | null, route: any) => {
   const { children, component, path, exact } = route;
 
   if (!children.length) {
@@ -21,7 +21,7 @@ export const routerAssessor = (parentRoutePath: string | null, route: any) => {
           exact={exact}
           component={component}
         />
-        {children.map((childRoute: any) => routerAssessor(path, childRoute))}
+        {children.map((childRoute: any) => renderRoute(path, childRoute))}
       </Switch>
     );
   }
