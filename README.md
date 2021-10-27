@@ -1,8 +1,8 @@
-# Description:
+## Description:
 
 Documentation link: [https://bielykh-artem.github.io/](https://bielykh-artem.github.io/)
 
-# Utils:
+## Utils:
 
 | Method | Description  | 
 | ------ | ------ |
@@ -10,8 +10,9 @@ Documentation link: [https://bielykh-artem.github.io/](https://bielykh-artem.git
 | createActions | Created actions based on a list of unique constants. | 
 | createThunkActions | Created actions based on a list of unique constants for using together with redux-thunk lib. |
 
-# Routing:
+## Routing:
 
 | Method | Description  | 
 | ------ | ------ |
-| routerRoute | Renders a list of routes based on the config. Allow child routes. The nesting level can be any. |
+| renderRoute | Renders a list of routes based on the config. Allow child routes. The nesting level can be any. |
+| JediRoutes | The component uses renderRoute method. All routes building logic is encapsulated inside the component |
