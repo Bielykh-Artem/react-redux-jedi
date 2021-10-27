@@ -9,6 +9,7 @@ Documentation link: [https://bielykh-artem.github.io/](https://bielykh-artem.git
 | createActionTypes | Creates action types for actions based on a list of unique constants. |
 | createActions | Created actions based on a list of unique constants. | 
 | createThunkActions | Created actions based on a list of unique constants for using together with redux-thunk lib. |
+| createReducer | Allows not to use switch/case inside reducers. |
 
 ## Routing:
 
