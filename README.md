@@ -17,3 +17,9 @@ Documentation link: [https://bielykh-artem.github.io/](https://bielykh-artem.git
 | ------ | ------ |
 | renderRoute | Renders a list of routes based on the config. Allow child routes. The nesting level can be any. |
 | JediRoutes | The component uses renderRoute method. All routes building logic is encapsulated inside the component |
+
+## Middlewares:
+
+| Method | Description  | 
+| ------ | ------ |
+| createLoaderMiddleware | Middleware that implements functionality for tracking the process of loading data in an application. Implemented two types for loading indicator. More info in docs. |
