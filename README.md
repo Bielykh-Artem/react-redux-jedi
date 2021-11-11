@@ -24,3 +24,9 @@ Documentation link: [https://bielykh-artem.github.io/](https://bielykh-artem.git
 | ------ | ------ |
 | createLoaderMiddleware | Middleware that implements functionality for tracking the process of loading data in an application. Implemented two types for loading indicator. More info in docs. |
 | createErrorsMiddleware | Implements functionality for handling errors in the application received as a response from the server. |
+
+## Hooks:
+
+| Method | Description  | 
+| ------ | ------ |
+| useSearchDebounce | Search debounce hook |
